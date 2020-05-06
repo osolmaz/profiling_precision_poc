@@ -1,5 +1,6 @@
-use profiling_precision_poc::increment_u128;
 use std::time::Instant;
+use profiling_precision_poc::increment_u128;
+use criterion::black_box;
 
 const N_ITER: usize = 10_000_000;
 
@@ -10,7 +11,7 @@ fn main() {
 
     for _i in 0..N_ITER {
         let now = Instant::now();
-        increment_u128(&mut a);
+        black_box(increment_u128(&mut a));
         durations.push(now.elapsed().as_nanos());
     }
 
@@ -22,7 +23,7 @@ fn main() {
     let mut a = 0;
 
     for _i in 0..N_ITER {
-        increment_u128(&mut a);
+        black_box(increment_u128(&mut a));
     }
 
     let total_duration = now.elapsed().as_nanos();

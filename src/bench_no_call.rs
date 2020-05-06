@@ -1,5 +1,7 @@
 use std::time::Instant;
 
+use criterion::black_box;
+
 const N_ITER: usize = 1_000_000;
 
 fn main() {
@@ -7,6 +9,7 @@ fn main() {
 
     for _i in 0..N_ITER {
         let now = Instant::now();
+        black_box(0);
         durations.push(now.elapsed().as_nanos());
     }
 
@@ -16,7 +19,9 @@ fn main() {
     //
     let now = Instant::now();
 
-    for _i in 0..N_ITER {}
+    for _i in 0..N_ITER {
+        black_box(0);
+    }
 
     let total_duration = now.elapsed().as_nanos();
     let mean_duration_2: f64 = total_duration as f64 / N_ITER as f64;

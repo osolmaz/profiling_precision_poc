@@ -1,6 +1,6 @@
 extern crate rand;
-
 use std::time::Instant;
+use criterion::black_box;
 
 use profiling_precision_poc::generate_random_u64;
 
@@ -13,7 +13,8 @@ fn main() {
 
     for _i in 0..N_ITER {
         let now = Instant::now();
-        generate_random_u64(&mut rng);
+        // generate_random_u64(&mut rng);
+        black_box(generate_random_u64(&mut rng));
         durations.push(now.elapsed().as_nanos());
     }
 
@@ -24,7 +25,8 @@ fn main() {
     let now = Instant::now();
 
     for _i in 0..N_ITER {
-        generate_random_u64(&mut rng);
+        // generate_random_u64(&mut rng);
+        black_box(generate_random_u64(&mut rng));
     }
 
     let total_duration = now.elapsed().as_nanos();
